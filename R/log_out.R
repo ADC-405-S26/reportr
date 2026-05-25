@@ -1,14 +1,29 @@
+#' Find Outliers in a Logistic Model
+#'
+#' @param y A binomial categorical vector as the independent variable
+#' @param x A numerical vector as the dependent variable
+#' @param deg An integer determining the degree of the logistic model
+#' @param positive A character value that determines which category in y will be considered "1" rather than "0"
+#'
+#' @returns A table of the vertical distances of each y-value (0 or 1) from its predicted probability
+#' @importFrom checkmate assert check_character check_factor assertFactor assert_numeric assertInt assertChoice assert_number
+#' @importFrom stats binomial glm predict
+#' @export
+#'
+#'
+#' @examples
+#' x1 <- c(70, 81, 22, 65, 21, 32, 7, 71, 58, 37, 52, 83, 4, 71, 97)
+#' y1 <- c("TRUE", "TRUE", "FALSE", "TRUE", "FALSE", "FALSE", "FALSE", "FALSE",
+#'         "TRUE", "FALSE", "FALSE", "TRUE", "FALSE", "TRUE", "FALSE")
+#' output <- log_out(y1, x1, 1, "TRUE")
 log_out <- function(y, x, deg, positive)
 {
 
-  # Load checkmate
-  library(checkmate)
-
   # First checkmate assertion
-    assert(
+    checkmate::assert(
     combine = "or",
-    check_character(y),
-    check_factor(y))
+    checkmate::check_character(y),
+    checkmate::check_factor(y))
 
   # Put y in factor form first before performing the rest of the assertions
   y <- factor(y)
@@ -16,7 +31,7 @@ log_out <- function(y, x, deg, positive)
   # Other required assertions
   checkmate::assertFactor(y, n.levels = 2)
   checkmate::assert_numeric(x)
-  checkmate::assert_number(deg)
+  checkmate::assertInt(deg)
   checkmate::assertChoice(factor(positive), choices = y)
   checkmate::assert_number(length(y), lower = deg + 1)
 
