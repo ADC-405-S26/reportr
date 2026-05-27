@@ -8,3 +8,7 @@ project*.tgz
 reportr.Rcheck/
 reportr*.tar.gz
 reportr*.tgz
+inst/doc
+/doc/
+/Meta/
+docs

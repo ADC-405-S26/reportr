@@ -1,0 +1,68 @@
+---
+title: "Introduction to reportr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to reportr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+
+# reportr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of reportr is to isolate and eliminate potential outliers as you perform data analysis.
+
+## Installation
+
+You can install the development version of reportr from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("owennhorton/reportr")
+```
+
+Then load reportr by using the library function:
+
+```{r example}
+library(reportr)
+```
+
+#### lin_out Example
+
+lin_out uses linear regression on one numeric predictor and one numeric feature, with whatever degree you wish. It will return a table of each data point's vertical distance from the predicted value.
+
+```{r}
+lin_out(y = toy_data$y1, x = toy_data$x1, deg = 2)
+```
+
+
+#### log_out Example
+
+log_out on the other hand uses logistic regression on one numeric predictor column and one binomial categorical response column. Be sure to not only define a degree, but also positive, a.k.a. which category will be treated as a response of 1 rather than 0. log_out will return a table of each data point's vertical distance from the predicted probability.
+
+```{r}
+log_out(y = toy_data$y2, x = toy_data$x1, deg = 1, positive = "TRUE")
+```
+
+
+#### kick_out Example
+
+If you want, reportr can help eliminate those pesky outliers from your data. Add the dataset you used as a dataframe, along with the distances obtained from lin_out or log_out, and a threshold for what distances will be considered outliers to be eliminated. The result will be your dataset with all the isolated outliers filtered out (Note that the row numbers on this output can be misleading, there are actually only 13 rows here). 
+
+```{r}
+output <- log_out(y = toy_data$y2, x = toy_data$x1, deg = 1, positive = "TRUE")
+kick_out(data = toy_data, distances = output$Distance, threshold = 0.7)
+```
+
