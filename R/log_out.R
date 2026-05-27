@@ -38,7 +38,7 @@ log_out <- function(y, x, deg, positive)
   # Define certain preliminaries before the loop
   n <- length(y)
 
-  Y_value <- numeric(n)
+  Response <- numeric(n)
 
   Prediction <- numeric(n)
 
@@ -59,7 +59,7 @@ log_out <- function(y, x, deg, positive)
                      family = binomial)
 
     # Actual y_value
-    Y_value[i] <- ifelse(test_point$y == positive, 1, 0)
+    Response[i] <- ifelse(test_point$y == positive, 1, 0)
 
     # Prediction of y[i] based on the other points
     Prediction[i] <- predict(object = model,
@@ -67,10 +67,10 @@ log_out <- function(y, x, deg, positive)
                                    type = "response")
 
     # Vertical distance of the data point from the best fit line
-    Distance[i] <- abs(Y_value[i] - Prediction[i])
+    Distance[i] <- abs(Response[i] - Prediction[i])
   }
 
   # Return a data frame of the key values that will isolate potential outliers
-  return(data.frame(Y_value, Prediction, Distance))
+  return(data.frame(Response, Prediction, Distance))
 
 }

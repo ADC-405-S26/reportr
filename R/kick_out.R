@@ -26,7 +26,10 @@ kick_out <- function(data, distances, threshold){
     min.rows = 1,
     min.cols = 1
   )
+  a <- nrow(data)
+  b <- length(distances)
   checkmate::assert_numeric(distances)
+  checkmate::assert(identical(a, b), .var.name = "a == b")
   checkmate::assert_number(threshold)
 
   # Find indices of points that are past the threshold
