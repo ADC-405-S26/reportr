@@ -81,11 +81,21 @@ you perform data analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://adc-405-s26.github.io/reportr/">reportr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level5">
-<h5 id="lin_out-example">lin_out Example<a class="anchor" aria-label="anchor" href="#lin_out-example"></a>
+<h5 id="lin_out">lin_out<a class="anchor" aria-label="anchor" href="#lin_out"></a>
 </h5>
-<p>lin_out uses linear regression on one numeric predictor and one
-numeric feature, with whatever degree you wish. It will return a table
-of each data point’s vertical distance from the predicted value.</p>
+<p>Description: lin_out is a function designed to mathematically locate
+potential outliers in numerical datasets with one predictor x and one
+response variable y. As a data scientist, it can be difficult to make
+that distinction or find reasonable justification to do so. lin_out
+implements linear regression with a degree of your choosing in order to
+calculate the vertical distance of points from the predicted value
+(obtained without including the data point in question). This could be a
+good metric for isolating outliers and improving model performance for a
+regression problem.</p>
+<p>Usage: lin_out uses linear regression on one numeric predictor and
+one numeric feature, with whatever degree you wish. It will return a
+table of each data point’s vertical distance from the predicted
+value.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/lin_out.html">lin_out</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">toy_data</span><span class="op">$</span><span class="va">y1</span>, x <span class="op">=</span> <span class="va">toy_data</span><span class="op">$</span><span class="va">x1</span>, deg <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Response   Prediction   Distance</span></span>
@@ -108,12 +118,17 @@ of each data point’s vertical distance from the predicted value.</p>
 <div class="section level5">
 <h5 id="log_out-example">log_out Example<a class="anchor" aria-label="anchor" href="#log_out-example"></a>
 </h5>
-<p>log_out on the other hand uses logistic regression on one numeric
-predictor column and one binomial categorical response column. Be sure
-to not only define a degree, but also positive, a.k.a. which category
-will be treated as a response of 1 rather than 0. log_out will return a
-table of each data point’s vertical distance from the predicted
-probability.</p>
+<p>Description: log_out is also designed to locate potential outliers
+via calculating a vertical distance column, but this implements a
+logistic regression model, for when the response variable y is a
+binomial categorical variable and predictor x is numeric. This function
+can be especially useful when looking for ways to improve a model’s
+performance in a classification problem.</p>
+<p>Usage: log_out uses logistic regression on one numeric predictor
+column and one binomial categorical response column. Be sure to not only
+define a degree, but also positive, a.k.a. which category will be
+treated as a response of 1 rather than 0. log_out will return a table of
+each data point’s vertical distance from the predicted probability.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/log_out.html">log_out</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">toy_data</span><span class="op">$</span><span class="va">y2</span>, x <span class="op">=</span> <span class="va">toy_data</span><span class="op">$</span><span class="va">x1</span>, deg <span class="op">=</span> <span class="fl">1</span>, positive <span class="op">=</span> <span class="st">"TRUE"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Response Prediction   Distance</span></span>
@@ -136,6 +151,13 @@ probability.</p>
 <div class="section level5">
 <h5 id="kick_out-example">kick_out Example<a class="anchor" aria-label="anchor" href="#kick_out-example"></a>
 </h5>
+<p>Description: lin_out and log_out are preliminary functions that
+obtain vertical distances and give the data scientist insight, but
+kick_out gets the rest of the job done. It isolates data points based on
+a threshold you set for the vertical distance, and will filter out the
+respective rows in your raw dataset to make a clean, outlier-free data
+frame. Be careful however, the dataset you put in kick_out must not have
+any missing entries, or an error will be thrown.</p>
 <p>If you want, reportr can help eliminate those pesky outliers from
 your data. Add the dataset you used as a dataframe, along with the
 distances obtained from lin_out or log_out, and a threshold for what
