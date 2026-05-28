@@ -17,7 +17,7 @@ You can install the development version of reportr from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("owennhorton/reportr")
+devtools::install_github("ADC-405-S26/reportr")
 ```
 
 Then load reportr by using the library function:
