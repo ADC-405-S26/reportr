@@ -11,7 +11,7 @@ You can install the development version of reportr from
 ``` r
 
 # install.packages("devtools")
-devtools::install_github("owennhorton/reportr")
+devtools::install_github("ADC-405-S26/reportr")
 ```
 
 Then load reportr by using the library function:
@@ -112,18 +112,14 @@ kick_out(data = toy_data, distances = output$Distance, threshold = 0.7)
 
 ## All functions
 
-- [`kick_out()`](https://adc-405-s26.github.io/reportr/reference/kick_out.md)
-  : Kick Out Outliers in your Data
-- [`lin_out()`](https://adc-405-s26.github.io/reportr/reference/lin_out.md)
-  : Find Outliers in a Linear Model
-- [`log_out()`](https://adc-405-s26.github.io/reportr/reference/log_out.md)
-  : Find Outliers in a Logistic Model
-- [`toy_data`](https://adc-405-s26.github.io/reportr/reference/open-curly-toy_data-close.md)
-  : toy_dataset for reportr purposes
+- [`kick_out()`](kick_out.md) : Kick Out Outliers in your Data
+- [`lin_out()`](lin_out.md) : Find Outliers in a Linear Model
+- [`log_out()`](log_out.md) : Find Outliers in a Logistic Model
+- [`toy_data`](open-curly-toy_data-close.md) : toy_dataset for reportr
+  purposes
 
 # Articles
 
 ### All vignettes
 
-- [Introduction to
-  reportr](https://adc-405-s26.github.io/reportr/articles/Intro-to-reportr.md):
+- [Introduction to reportr](Intro-to-reportr.md):
